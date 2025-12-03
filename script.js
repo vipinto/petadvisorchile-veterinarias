@@ -58,7 +58,7 @@ servicios.forEach((servicio) => {
       <span><b>Teléfono:</b> ${servicio.telefono || "No registrado"}</span><br/>
       <span><b>Tipo:</b> ${servicio.tipo || "Sin tipo"}</span><br/>
       <span style="font-size:11px; color:#666;">
-        ID Adalo: ${servicio.placeId || "N/A"}
+        PlaceID: ${servicio.placeId || "N/A"}
       </span>
     </div>
   `;
