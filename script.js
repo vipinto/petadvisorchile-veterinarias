@@ -14,12 +14,12 @@ const params = new URLSearchParams(window.location.search);
 const tipoFiltro = params.get("tipo"); // ej: ?tipo=veterinarias
 
 // ------------------
-// BASE DE DATOS LOCAL (puedes pegar aquí todos tus servicios)
+// BASE DE DATOS LOCAL
 // ------------------
 const servicios = [
   {
     id: 1,
-    placeId: "vet-colina-001",           // ID que usarás en Adalo
+    placeId: "vet-colina-001",
     nombre: "Veterinaria Colina",
     lat: -33.3305,
     lng: -70.6783,
@@ -44,7 +44,6 @@ const servicios = [
     telefono: "",
     tipo: "parques",
   },
-  // 👉 acá sigues agregando: rescates, adiestradores, hoteles, etc.
 ];
 
 // Para ajustar el mapa a todos los puntos visibles
@@ -54,24 +53,24 @@ const markers = [];
 // PINTAR LOS SERVICIOS EN EL MAPA
 // ------------------
 servicios.forEach((s) => {
-  // Filtro por tipo si viene en la URL
   if (tipoFiltro && s.tipo !== tipoFiltro) return;
-
-  // Si no tiene coordenadas, lo saltamos
   if (!s.lat || !s.lng) return;
 
   const marker = L.marker([s.lat, s.lng]).addTo(map);
 
-  // Popup: aquí solo mostramos info básica
+  // Popup con teléfono clickeable
   const popupHtml = `
     <div>
       <strong>${s.nombre}</strong><br>
-      <small>${s.telefono ? "Tel: " + s.telefono : ""}</small><br>
-      <!--
-        Link con placeId:
-        luego, desde Adalo, puedes usar este placeId para seleccionar el ítem
-        de la Simple List si decides capturar la URL o abrir una ficha.
-      -->
+
+      <small>
+        ${
+          s.telefono
+            ? `Tel: <a href="tel:${s.telefono.replace(/\s+/g, "")}">${s.telefono}</a>`
+            : ""
+        }
+      </small><br>
+
       <small>Place ID: ${s.placeId}</small>
     </div>
   `;
