@@ -58,18 +58,31 @@ servicios.forEach((s) => {
 
   const marker = L.marker([s.lat, s.lng]).addTo(map);
 
-  // Popup con teléfono clickeable
+  // Limpiar teléfono
+  const cleanTel = s.telefono ? s.telefono.replace(/\s+/g, "") : "";
+
+  // Popup con teléfono clickeable + botón "Cómo llegar"
   const popupHtml = `
     <div>
       <strong>${s.nombre}</strong><br>
 
-      <small>
-        ${
-          s.telefono
-            ? `Tel: <a href="tel:${s.telefono.replace(/\s+/g, "")}">${s.telefono}</a>`
-            : ""
-        }
-      </small><br>
+      ${
+        s.telefono
+          ? `
+            <small>
+              Tel: <a href="tel:${cleanTel}" style="color:#007bff; text-decoration:underline;">
+                ${s.telefono}
+              </a>
+            </small><br>
+          `
+          : ""
+      }
+
+      <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}"
+         target="_blank"
+         style="color:#ff5722; text-decoration:underline; font-weight:bold;">
+        📍 Cómo llegar
+      </a><br>
 
       <small>Place ID: ${s.placeId}</small>
     </div>
