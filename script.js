@@ -20,7 +20,6 @@ const servicios = [
     lat: -33.3305,
     lng: -70.6783,
     descripcion: "Urgencias 24 horas",
-    url: "https://ejemplo.cl/servicio/1",
   },
   {
     id: 2,
@@ -29,7 +28,6 @@ const servicios = [
     lat: -33.4375,
     lng: -70.65,
     descripcion: "Alimentos y accesorios",
-    url: "https://ejemplo.cl/servicio/2",
   },
   // … agrega más servicios
 ];
