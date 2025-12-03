@@ -1,5 +1,5 @@
-// Coordenadas iniciales del mapa (ej: Santiago)
-const map = L.map("map").setView([-33.45, -70.66], 12);
+// Crear el mapa centrado en Santiago
+const map = L.map("map").setView([-33.45, -70.66], 11);
 
 // Capa base de OpenStreetMap
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -7,7 +7,7 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap contributors",
 }).addTo(map);
 
-// Array de servicios (ejemplo)
+// Servicios de prueba
 const servicios = [
   {
     id: 1,
@@ -15,7 +15,7 @@ const servicios = [
     lat: -33.3305,
     lng: -70.6783,
     descripcion: "Urgencias 24 horas",
-    url: "https://tusitio.cl/servicio/1",
+    url: "https://ejemplo.cl/servicio/1",
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ const servicios = [
     lat: -33.4375,
     lng: -70.65,
     descripcion: "Alimentos y accesorios",
-    url: "https://tusitio.cl/servicio/2",
+    url: "https://ejemplo.cl/servicio/2",
   },
 ];
 
@@ -31,7 +31,6 @@ const servicios = [
 servicios.forEach((s) => {
   const marker = L.marker([s.lat, s.lng]).addTo(map);
 
-  // Contenido del popup
   const popupHtml = `
     <div>
       <strong>${s.nombre}</strong><br />
