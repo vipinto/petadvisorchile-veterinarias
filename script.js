@@ -1738,22 +1738,28 @@ servicios.forEach((servicio) => {
 
   // Contenido del popup
   const popupHtml = `
-    <div style="font-size:14px;">
-      <strong>${servicio.nombre}</strong><br/>
-      <span><b>Teléfono:</b> 
-        ${servicio.telefono 
-          ? `<a href="${fonoLink}" style="color:#1a73e8;">${servicio.telefono}</a>` 
-          : "No registrado"}
-      </span><br/>
-      <span><b>Tipo:</b> ${servicio.tipo || "Sin tipo"}</span><br/>
-      <a href="${mapsUrl}" target="_blank" rel="noopener" style="font-size:13px; text-decoration:underline; display:inline-block; margin-top:4px;">
-        📍 Cómo llegar
-      </a><br/>
-      <span style="font-size:11px; color:#666;">
-        PlaceID: ${servicio.placeId || "N/A"}
-      </span>
-    </div>
-  `;
+  <div style="font-size:15px;">
+    <strong style="font-size:16px;">${servicio.nombre}</strong><br/><br/>
+
+    <b>Teléfono:</b><br/>
+    ${servicio.telefono 
+      ? `<a href="${fonoLink}" style="color:#1a73e8; font-size:15px;">${servicio.telefono}</a>` 
+      : "No registrado"}
+    <br/><br/>
+
+    <b>Tipo:</b> ${servicio.tipo || "Sin tipo"}<br/><br/>
+
+    <a href="${mapsUrl}" target="_blank" style="color:#1a73e8; font-size:15px;">
+      📍 Cómo llegar
+    </a>
+    <br/><br/>
+
+    <span style="font-size:11px; color:#666;">
+      PlaceID: ${servicio.placeId || "N/A"}
+    </span>
+  </div>
+`;
+
 
   marker.bindPopup(popupHtml);
 });
