@@ -1685,6 +1685,27 @@ const servicios = [
 
 // Si hay servicios, centra el mapa en el primero.
 // Si no, usa un centro por defecto (Santiago).
+// -------------------------
+// FUNCIÓN PARA NORMALIZAR TELÉFONO
+// -------------------------
+function normalizarTelefono(fono) {
+  if (!fono) return ""; // evita errores
+
+  // eliminar todo lo que no sea número
+  let limpio = fono.replace(/\D+/g, "");
+
+  // si NO parte con 56 → agregarlo
+  if (!limpio.startsWith("56")) {
+    limpio = "56" + limpio;
+  }
+
+  // devolver formato universal de llamada
+  return `tel:+${limpio}`;
+}
+
+// -------------------------
+// CONFIGURAR MAPA
+// -------------------------
 const centroLat = servicios.length ? servicios[0].lat : -33.45;
 const centroLng = servicios.length ? servicios[0].lng : -70.66;
 
@@ -1699,19 +1720,25 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 // -------------------------
 // PINTAR MARCADORES
 // -------------------------
-
 servicios.forEach((servicio) => {
   if (typeof servicio.lat !== "number" || typeof servicio.lng !== "number") {
-    return; // Si falta lat/lng, saltamos este servicio
+    return; // si falta lat/lng, saltamos este servicio
   }
 
   const marker = L.marker([servicio.lat, servicio.lng]).addTo(map);
+
+  // ← limpiar teléfono aquí
+  const fonoLink = normalizarTelefono(servicio.telefono);
 
   // Contenido del popup
   const popupHtml = `
     <div style="font-size:14px;">
       <strong>${servicio.nombre}</strong><br/>
-      <span><b>Teléfono:</b> ${servicio.telefono || "No registrado"}</span><br/>
+      <span><b>Teléfono:</b> 
+        ${servicio.telefono 
+          ? `<a href="${fonoLink}" style="color:#1a73e8;">${servicio.telefono}</a>` 
+          : "No registrado"}
+      </span><br/>
       <span><b>Tipo:</b> ${servicio.tipo || "Sin tipo"}</span><br/>
       <span style="font-size:11px; color:#666;">
         PlaceID: ${servicio.placeId || "N/A"}
