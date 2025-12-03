@@ -1,13 +1,13 @@
+/* Quita márgenes para que el mapa use toda la pantalla */
 html,
 body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
+/* El mapa ocupa todo el alto visible */
 #map {
   width: 100%;
-  height: 100vh; /* el mapa ocupa toda la pantalla */
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  height: 100vh;
 }
